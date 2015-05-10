@@ -5,35 +5,52 @@
 USING_NS_CC;
 
 using namespace cocostudio::timeline;
+using namespace ui;
 
 Scene* HelloWorld::createScene()
 {
-    // 'scene' is an autorelease object
     auto scene = Scene::create();
     
-    // 'layer' is an autorelease object
     auto layer = HelloWorld::create();
 
-    // add layer as a child to scene
     scene->addChild(layer);
 
-    // return the scene
     return scene;
 }
 
-// on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-    //////////////////////////////
-    // 1. super init first
     if ( !Layer::init() )
     {
         return false;
     }
     
     auto rootNode = CSLoader::createNode("MainScene.csb");
-
     addChild(rootNode);
+
+	auto button = Button::create("CloseNormal.png","CloseSelected.png");
+	button->setPosition(Vec2(100,100));
+	addChild(button);
+
+	button->addClickEventListener([](Ref* ref)
+	{
+		log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+
+	});
+
+	auto button1 = Button::create("CloseNormal.png","CloseSelected.png");
+	button1->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2,Director::getInstance()->getVisibleSize().height / 2));
+	addChild(button1);
+
+	button1->addClickEventListener([](Ref* ref)
+	{
+		log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+	});
+
+	auto guide = GuideLayer::create();
+	addChild(guide);
+
 
     return true;
 }
